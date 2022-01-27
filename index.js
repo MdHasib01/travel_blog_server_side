@@ -56,14 +56,14 @@ async function run() {
       res.json(result);
     });
 
-    // //GET Blogs API
+    // //GET Blogs API-----
     app.get("/allblogs", async (req, res) => {
       const cursor = blogsCollection.find({});
       const allblogs = await cursor.toArray();
       res.send(allblogs);
     });
 
-    //delete blogs data
+    //delete blogs data-----
     app.delete("/allblogs/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: ObjectId(id) };
