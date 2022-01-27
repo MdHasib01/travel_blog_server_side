@@ -63,7 +63,7 @@ async function run() {
       res.send(allblogs);
     });
 
-    //delete PRODUCTS data
+    //delete blogs data
     app.delete("/allblogs/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: ObjectId(id) };
