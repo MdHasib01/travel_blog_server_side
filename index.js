@@ -63,7 +63,15 @@ async function run() {
       res.send(allblogs);
     });
 
-    //Find one
+    //delete PRODUCTS data
+    app.delete("/allblogs/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: ObjectId(id) };
+      const result = await blogsCollection.deleteOne(query);
+      res.json(result);
+    });
+
+    //Find one----
     app.get("/allblogs/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: ObjectId(id) };
