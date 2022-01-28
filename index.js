@@ -37,6 +37,7 @@ async function run() {
       const blogger = req.body.blogger;
       const address = req.body.address;
       const cost = req.body.cost;
+      const rating = req.body.rating;
       const imageTitle = req.body.imageTitle;
       const pic = req.files.image;
       const picData = pic.data;
@@ -50,6 +51,7 @@ async function run() {
         blogger,
         address,
         cost,
+        rating,
         imageTitle,
         image: imageBuffer,
       };
@@ -100,6 +102,8 @@ async function run() {
       const blogger = req.body.blogger;
       const address = req.body.address;
       const cost = req.body.cost;
+      const checked = req.body.checked;
+      const rating = req.body.rating;
       const imageTitle = req.body.imageTitle;
       const pic = req.files.image;
       const picData = pic.data;
@@ -114,6 +118,8 @@ async function run() {
         blogger,
         address,
         cost,
+        checked,
+        rating,
         imageTitle,
         image: imageBuffer,
       };
