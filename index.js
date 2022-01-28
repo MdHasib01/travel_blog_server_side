@@ -133,7 +133,13 @@ async function run() {
       const allblogs = await cursor.toArray();
       res.send(allblogs);
     });
-
+    //user Single blog
+    app.get("/userblogs/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: ObjectId(id) };
+      const result = await userBlogsCollection.findOne(query);
+      res.json(result);
+    });
     //post comment
     app.post("/comments", async (req, res) => {
       const comments = req.body;
