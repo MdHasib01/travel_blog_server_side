@@ -81,6 +81,27 @@ async function run() {
       const result = await blogsCollection.findOne(query);
       res.json(result);
     });
+
+    // Update one blog
+    app.put("/allblogs/:id", async (req, res) => {
+      const id = req.params.id;
+      const updateBlog = req.body;
+      const filter = { _id: ObjectId(id) };
+      const options = { upsert: true };
+      const updateDoc = {
+        $set: {
+          title: updateBlog.title,
+          blogsDetails: updateBlog.blogsDetails,
+          blogger: updateBlog.bloggers,
+          address: updateBlog.address,
+          cost: updateBlog.cost,
+        },
+      };
+      const result = await blogsCollection.findOne(query);
+      res.json(result);
+    });
+
+    // Query By catagory--
     app.get("/category", async (req, res) => {
       const category = req.query.category;
       const query = { category: category };
