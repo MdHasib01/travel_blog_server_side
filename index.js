@@ -153,7 +153,7 @@ async function run() {
     app.get("/checked", async (req, res) => {
       const checked = req.query.checked;
       const query = { checked: checked };
-      const cursor = blogsCollection.find(query);
+      const cursor = userBlogsCollection.find(query);
       const checkedBlogs = await cursor.toArray();
       res.json(checkedBlogs);
     });
