@@ -25,6 +25,7 @@ async function run() {
     await client.connect();
     const database = client.db("travel_blog");
     const blogsCollection = database.collection("blogs");
+    const userBlogsCollection = database.collection("userblogs");
     const commentsCollection = database.collection("comments");
 
     //Post Blogs Data
@@ -84,6 +85,47 @@ async function run() {
       const cursor = blogsCollection.find(query);
       const categories = await cursor.toArray();
       res.json(categories);
+    });
+
+    /*-------------------------------------- 
+               User Blogs Post 
+    --------------------------------------*/
+    //Post user Blogs Data
+    app.post("/userblogs", async (req, res) => {
+      const title = req.body.title;
+      const userEmail = req.body.userEmail;
+      const blogsDetails = req.body.blogsDetails;
+      const category = req.body.category;
+      const time = req.body.time;
+      const blogger = req.body.blogger;
+      const address = req.body.address;
+      const cost = req.body.cost;
+      const imageTitle = req.body.imageTitle;
+      const pic = req.files.image;
+      const picData = pic.data;
+      const encodedPic = picData.toString("base64");
+      const imageBuffer = Buffer.from(encodedPic, "base64");
+      const blog = {
+        title,
+        userEmail,
+        blogsDetails,
+        category,
+        time,
+        blogger,
+        address,
+        cost,
+        imageTitle,
+        image: imageBuffer,
+      };
+      const result = await userBlogsCollection.insertOne(blog);
+      res.json(result);
+    });
+
+    // //GET user Blogs API
+    app.get("/userblogs", async (req, res) => {
+      const cursor = userBlogsCollection.find({});
+      const allblogs = await cursor.toArray();
+      res.send(allblogs);
     });
 
     //post comment
