@@ -97,7 +97,11 @@ async function run() {
           cost: updateBlog.cost,
         },
       };
-      const result = await blogsCollection.findOne(query);
+      const result = await blogsCollection.updateOne(
+        filter,
+        updateDoc,
+        options
+      );
       res.json(result);
     });
 
